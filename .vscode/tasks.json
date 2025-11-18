@@ -1,0 +1,20 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Lua",
+      "command": "lua",
+      "args": ["${file}"],
+      "type": "shell",
+      "problemMatcher": [],
+      "options": {
+        "env": {
+          // "PATH": "${env:PATH};/config/.luarocks/lib/luarocks/rocks5.1",
+          "LUA_PATH": "./?.lua;/usr/local/share/lua/5.1/?.lua;/usr/local/share/lua/5.1/?/init.lua;/usr/local/lib/lua/5.1/?.lua;/usr/local/lib/lua/5.1/?/init.lua;/usr/share/lua/5.1/?.lua;/usr/share/lua/5.1/?/init.lua;/config/.luarocks/share/lua/5.1/?.lua;/config/.luarocks/share/lua/5.1/?/init.lua",
+          "LUA_CPATH": "./?.so;/usr/local/lib/lua/5.1/?.so;/usr/lib/x86_64-linux-gnu/lua/5.1/?.so;/usr/lib/lua/5.1/?.so;/usr/local/lib/lua/5.1/loadall.so;/config/.luarocks/lib/lua/5.1/?.so",
+          "PATH": "/config/.luarocks/bin:/app/code-server/lib/vscode/bin/remote-cli:/config/.local/share/pnpm:/command:/lsiopy/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+        }
+      }
+    }
+  ]
+}

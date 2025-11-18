@@ -617,6 +617,11 @@ local function getAdvThrows(result, mode, hitData)
 	return hitRow
 end
 
+local modeConfig = {
+	iasa = true,
+	autocancel = true
+}
+
 local function createMode(hasArticle, mode, motherhits, hitresults, throwresults)
 	-- Frame Window
 	local frameWindow = mw.html.create("tbody")

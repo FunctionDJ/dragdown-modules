@@ -5,5 +5,18 @@
   "Lua.completion.autoRequire": true,
   "Lua.completion.requireSeparator": ".",
   "editor.formatOnSave": false, // dont auto format for now,
-  "editor.rulers": [80]
+  "editor.rulers": [80],
+  "lua.debug.settings.luaVersion": "lua51",
+  "Lua.hint.enable": true,
+  "Lua.hint.paramName": "Literal",
+  "Lua.type.checkTableShape": true,
+  "Lua.workspace.ignoreDir": [
+    ".vscode",
+    "node_modules"
+  ],
+  "Lua.workspace.library": [
+    "/config/.luarocks/share/lua/5.1/",
+    "${addons}/luassert/module/library"
+  ],
+  "Lua.workspace.checkThirdParty": false
 }

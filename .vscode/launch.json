@@ -1,0 +1,21 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "lua",
+      "request": "launch",
+      "name": "Debug",
+      "program": "${workspaceFolder}/main.lua",
+      "cwd": "${workspaceFolder}", // Sets the working directory to the workspace folder
+      "luaexe": "/usr/bin/lua",
+      "luaVersion": "lua51",
+      "env": {
+        "DEBUGGER": "True",
+        "PATH": "${env:PATH};/config/.luarocks/lib/luarocks/rocks5.1"
+      },
+      "cpath": "/config/.luarocks/lib/luarocks/rocks5.1/?51.dll;/config/.luarocks/lib/luarocks/rocks5.1/?.dll;",
+      "path": "/config/.luarocks/share/lua/5.1/?.lua;/config/.luarocks/share/lua/5.1/?/init.lua;./?.lua",
+      "stopOnEntry": false // Whether to stop at the first line
+    }
+  ]
+}
