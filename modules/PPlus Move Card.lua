@@ -8,18 +8,6 @@ local tooltip = require("Tooltip")
 local cargo = mw.ext.cargo
 local mysplit = require("Mysplit")
 
-local function readModes(chara, attack)
-	local tables = "PPlus_MoveMode"
-	local fields =
-		"chara, attack, attackID, mode, startup, startupNotes, totalActive, totalActiveNotes, endlag, endlagNotes, cancel, cancelNotes, landingLag, landingLagNotes, totalDuration, totalDurationNotes,iasa,autocancel,autocancelNotes,hitID,hitSubactionID,hitName,hitActive,customShieldSafety,uniqueField,frameChart, articleID, notes"
-	local args = {
-		where = 'PPlus_MoveMode.chara="' .. chara .. '" and PPlus_MoveMode.attack="' .. attack .. '"',
-		orderBy = "_ID",
-	}
-	local results = cargo.query(tables, fields, args)
-	return results
-end
-
 local function calcTumblePercent(bkb, kbg, weight, dmg, crouch)
 	local tumbleThreshold = 80
 	local crouchThreshold = 120
@@ -44,12 +32,8 @@ local function calcTumblePercent(bkb, kbg, weight, dmg, crouch)
 	end
 end
 
-local function calcWDSKWeight(wdsk, bkb, kbg, crouch)
-	if kbg == 0 then
-		return math.floor((1 / ((80 - bkb)/ -18)) * ((((wdsk * 10 * 0.05) + 1) * 1.4)) * 200 - 100)
-	else
-		return math.floor((1 / ((80 - bkb)/(kbg * 0.01) - 18)) * ((((wdsk * 10 * 0.05) + 1) * 1.4)) * 200 - 100)
-	end
+local function calcWDSKWeight(wdsk, bkb, kbg)
+	return math.floor(140 * (wdsk + 2) / (100 * (80 - bkb) / kbg - 18) - 100)
 end
 
 local function calcSimpleTumble(result)
@@ -62,10 +46,10 @@ local function calcSimpleTumble(result)
 	local maxWeight = 113 -- Bowser Weight
 
 	if wdsk ~= 0 then
-		if calcWDSKWeight(wdsk, bkb, kbg, false) < minWeight then
+		if calcWDSKWeight(wdsk, bkb, kbg) < minWeight then
 			return "Never"
 		else 
-			return "Weight: " .. calcWDSKWeight(wdsk, bkb, kbg, false)	
+			return "Weight: " .. calcWDSKWeight(wdsk, bkb, kbg)	
 		end
 		
 	elseif calcTumblePercent(bkb, kbg, minWeight, d, false) == "N/A" then
@@ -798,10 +782,9 @@ local function getCardHTML(chara, attack, desc, advDesc)
 
 	nerdSection:node(mw.html.create("div"):wikitext(advDesc))
 
-	local tableData = readModes(chara, attack)
-	-- tableData = lib.getModes(chara, attack,
-	-- "chara, attack, attackID, mode, startup, startupNotes, totalActive, totalActiveNotes, endlag, endlagNotes, cancel, cancelNotes, landingLag, landingLagNotes, totalDuration, totalDurationNotes,iasa,autocancel,autocancelNotes,hitID,hitSubactionID,hitName,hitActive,customShieldSafety,uniqueField,frameChart, articleID, notes"
-	-- )
+	local tableData = lib.getModes(chara, attack,
+	"chara,attack,attackID,mode,startup,startupNotes,totalActive,totalActiveNotes,endlag,endlagNotes,cancel,cancelNotes,landingLag,landingLagNotes,totalDuration,totalDurationNotes,iasa,autocancel,autocancelNotes,hitID,hitSubactionID,hitName,hitActive,customShieldSafety,uniqueField,frameChart,articleID,notes"
+	)
 
 	if #tableData > 1 then
 		local object = {}

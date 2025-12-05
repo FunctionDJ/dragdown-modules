@@ -22,4 +22,3 @@ to-dos and things to consider:
 (slow on first run, repeat cargo queries are cached in `.cache`)
 2. use `scripts/compare-reference-output.lua` to render modules and compare their output to `./reference-output`
 3. optional: use `scripts/watch-compare.sh` to automatically run the compare script when `.lua` files are changed
-(uses inotify, so when the `scripts/watch-compare.sh` is run it won't do anything until the first detected save)
